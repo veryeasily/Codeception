@@ -3129,13 +3129,14 @@ class WebDriver extends CodeceptionModule implements
      * @param $selector
      * @param int $offsetX
      * @param int $offsetY
+     * @param $region
      */
-    public function scrollTo($selector, $offsetX = null, $offsetY = null)
+    public function scrollTo($selector, $offsetX = null, $offsetY = null, $region = 'window')
     {
         $el = $this->matchFirstOrFail($this->getBaseElement(), $selector);
         $x = $el->getLocation()->getX() + $offsetX;
         $y = $el->getLocation()->getY() + $offsetY;
-        $this->webDriver->executeScript("window.scrollTo($x, $y)");
+        $this->webDriver->executeScript("document.querySelector($region).scrollTo($x, $y)");
     }
 
     /**
